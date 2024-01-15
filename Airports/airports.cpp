@@ -187,19 +187,16 @@ std::map<std::vector<std::string>, Airport> Airport::AirportFileReader(const std
 
             if (!(splitline[4] == "\\N"))
             {
-                // cout << "   >>>IATA not null: " << splitline[4] << endl;
                 std::vector<std::string> airportKey;
                 airportKey.emplace_back(splitline[4]);
                 airportKey.emplace_back(splitline[2]);
-                // cout << splitline[2] << endl;
                 airportKey.emplace_back(splitline[3]);
-                // cout << splitline[3] << endl;
-                std::cout << vecToString(airportKey);
+                // std::cout << vecToString(airportKey);
 
                 Airport airport = Airport(splitline[1], splitline[2], splitline[3], splitline[4],
                                           splitline[6], splitline[7]);
-                std::cout << airport.toString() << std::endl;
-                std::cout << std::endl;
+                // std::cout << airport.toString() << std::endl;
+                // std::cout << std::endl;
                 AirportMap.insert(std::pair<std::vector<std::string>, Airport>(airportKey, airport));
             }
         }
@@ -229,11 +226,11 @@ void Airport::printMap(const std::map<std::vector<std::string>, Airport> thisMap
 }
 
 
-int main()
-{
-    std::map<std::vector<std::string>, Airport> myAirportMap;
+// int main()
+// {
+//     std::map<std::vector<std::string>, Airport> myAirportMap;
 
-    std::string filename = "//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/Airliner_/Airports/airports.csv";
-    myAirportMap = Airport::AirportFileReader(filename);
-    Airport::printMap(myAirportMap);
-}
+//     std::string filename = "//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/Airliner_/Airports/airports.csv";
+//     myAirportMap = Airport::AirportFileReader(filename);
+//     Airport::printMap(myAirportMap);
+// }

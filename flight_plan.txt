@@ -1,0 +1,7 @@
+ >> Flight Plan <<
+
+     1. flight 2J from ACC to DKR 0 stops
+     2. flight 2J from DKR to IAD 0 stops
+     3. flight AA from IAD to LGA 0 stops
+Total Flights: 3
+Total Additional Stops: 1

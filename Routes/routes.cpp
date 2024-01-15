@@ -10,7 +10,7 @@
 #include <sstream>
 #include <iostream>
 #include "routes.h"
-// #include "airports.h"
+#include "../Airports/airports.h"
 
 /**
  This class contains functions that read and utilize data stored in the Routes.csv file
@@ -79,10 +79,10 @@ std::vector<std::string> Route::stringToVec(std::string vector_string)
     std::string delimiter = ", ";
     std::string substring;
     size_t pos = 0;
+    
     while ((pos = vector_string.find(delimiter)) != std::string::npos)
     {
         substring = vector_string.substr(0, pos);
-        //            cout << substring << endl;
         output.emplace_back(substring);
         vector_string.erase(0, pos + delimiter.length());
     }
@@ -107,7 +107,6 @@ std::string const Route::vecToString(std::vector<std::string> string_vector)
         }
         stream << *it;
     }
-    //        stream << "]";
 
     return stream.str();
 }
@@ -119,8 +118,6 @@ std::string const Route::vecToString(std::vector<std::string> string_vector)
  */
 std::map<std::string, std::vector<std::string>> Route::AirportRouteReader(std::string const &filename)
 {
-
-    // map<string, vector<string>> AirRoutesMap;
     std::fstream inputStream;
     inputStream.open(filename);
 
@@ -134,36 +131,28 @@ std::map<std::string, std::vector<std::string>> Route::AirportRouteReader(std::s
         {
             splitline.clear();
             std::stringstream line_of(streamline);
-            //                cout << "  >> got streamline" << endl;
-            //                cout << "   >> streamline: " << streamline << endl;
 
             while (getline(line_of, streamword, ','))
             {
                 splitline.push_back(streamword);
-                //                    cout << "   >> got streamword: " << streamword << endl;
             }
 
-            //                read into AirRoutesMap first
+            // read into AirRoutesMap first
             std::string routekey = splitline[2];
-            //                cout << endl;
-            //                cout << " >> key - " << routekey << endl;
+
             if (AirportRoutesMap.count(routekey) > 0)
             {
                 // key found
                 std::vector<std::string> routelist = AirportRoutesMap[splitline[2]];
-                //                    cout << "  current list - " << vecToString(routelist) << endl;
                 routelist.emplace_back(splitline[4]);
                 AirportRoutesMap.erase(splitline[2]);
-                //                    cout << "  updated list - " << vecToString(routelist) << endl;
-                //                    cout << endl;
                 AirportRoutesMap.insert(std::pair<std::string, std::vector<std::string>>(routekey, routelist));
             }
             else
             {
-                //                  key not found
+                // key not found
                 std::vector<std::string> routelist;
                 routelist.emplace_back(splitline[4]);
-                //                    cout << "  new current list - " << vecToString(routelist) << endl;
                 AirportRoutesMap.insert(std::pair<std::string, std::vector<std::string>>(routekey, routelist));
             }
         }
@@ -188,7 +177,6 @@ std::map<std::vector<std::string>, std::vector<std::string>> Route::AirlineRoute
 
     std::fstream inputStream;
     inputStream.open(filename);
-    //            cout << "> file opened"<<endl;
     // check if file exists
     if (inputStream)
     {
@@ -199,27 +187,21 @@ std::map<std::vector<std::string>, std::vector<std::string>> Route::AirlineRoute
         {
             splitline.clear();
             std::stringstream line_of(streamline);
-            //                cout << "  >> got streamline" << endl;
-            //                cout << "   >> streamline: " << streamline << endl;
 
             while (getline(line_of, streamword, ','))
             {
                 splitline.push_back(streamword);
-                //                    cout << "   >> got streamword: " << streamword << endl;
             }
-            //              read into RouteAirlineMap
+            // read into RouteAirlineMap
             std::vector<std::string> routekey2;
             routekey2.emplace_back(splitline[0]); // airline code
             routekey2.emplace_back(splitline[2]); // source airport
             routekey2.emplace_back(splitline[7]); // stops
-                                                  //                cout << endl;
-                                                  //                cout << " >> key - " << vecToString(routekey2) << endl;
 
             if (AirlineRoutesMap.find(routekey2) != AirlineRoutesMap.end())
             {
                 // key found
                 std::vector<std::string> routelist = AirlineRoutesMap[routekey2];
-                //                    cout << "  current list - " << vecToString(routelist) << endl;
                 routelist.emplace_back(splitline[4]);
                 AirlineRoutesMap.erase(routekey2);
                 AirlineRoutesMap.insert(std::pair<std::vector<std::string>, std::vector<std::string>>(routekey2, routelist));
@@ -229,7 +211,6 @@ std::map<std::vector<std::string>, std::vector<std::string>> Route::AirlineRoute
                 // key not found
                 std::vector<std::string> routelist = AirlineRoutesMap[routekey2];
                 routelist.emplace_back(splitline[4]);
-                //                    cout << "  new current list - " << vecToString(routelist) << endl;
                 AirlineRoutesMap.insert(std::pair<std::vector<std::string>, std::vector<std::string>>(routekey2, routelist));
             }
         }
@@ -322,33 +303,27 @@ std::string Route::findRoute(std::string start_airport, std::string goal_airport
 
     std::deque<std::string> frontier;
     frontier.emplace_back(start_airport);
-    //        cout << "added parent " << start_airport << " to frontier " << endl;
     std::vector<std::string> explored_set;
-    //        cout << "explored set: " << vecToString(explored_set) << endl;
     std::vector<std::string> key;
+
     while (!frontier.empty())
     {
         std::string parent = frontier.front();
         frontier.pop_front();
-        //            cout << "popped parent, " << parent << endl;
         child_parent.insert(std::pair<std::string, std::string>(parent, ""));
         explored_set.emplace_back(parent);
-        //            cout << "added node to explored set, explored set: " << vecToString(explored_set) << endl;
-
         std::vector<std::string> successors = AirportRoutesMap[parent];
+
         if (!successors.empty())
         {
             for (int i = 0; i < successors.size(); i++)
             {
                 std::string child = successors[i];
                 child_parent.insert(std::pair<std::string, std::string>(child, parent));
-                //                    cout << "generated successor: " << child << endl;
                 if (!contains(explored_set, child) && (!contains(frontier, child)))
                 {
                     if (child.compare(goal_airport) == 0)
                     {
-                        //                            cout << "found goal: " << child << endl;
-                        //                            cout << vecToString(solution_path(child_parent, child));
                         std::string solution = solution_path(child_parent, child);
                         return solution;
                     }
@@ -375,10 +350,9 @@ std::string Route::solution_path(std::map<std::string, std::string> solution_map
 {
     std::vector<std::string> solution_path;
     solution_path.emplace_back(child);
-    //        cout << vecToString(solution_path) << endl;
     std::string parent = solution_map[child];
     solution_path.emplace_back(parent);
-    //        cout << vecToString(solution_path) << endl;
+
     while (parent != "")
     {
         child = parent;
@@ -394,40 +368,40 @@ std::string Route::solution_path(std::map<std::string, std::string> solution_map
 // std::map<std::string, std::vector<std::string>> Route::AirportRoutesMap;
 // std::map<std::vector<std::string>, std::vector<std::string>> Route::AirlineRoutesMap;
 
-int main()
-{
+// int main()
+// {
 
-    std::map<std::string, std::vector<std::string>> airport_routemap;
-    std::map<std::vector<std::string>, std::vector<std::string>> airline_routemap;
+//     std::map<std::string, std::vector<std::string>> airport_routemap;
+//     std::map<std::vector<std::string>, std::vector<std::string>> airline_routemap;
 
-    std::string filename = "/Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/Routes/routes.csv";
+//     std::string filename = "/Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/Routes/routes.csv";
 
-    airport_routemap = Route::AirportRouteReader(filename);
-    airline_routemap = Route::AirlineRouteReader(filename);
-    //    Route::printMap(myAirRoutesMap);
-    Route::printMap(airline_routemap);
+//     airport_routemap = Route::AirportRouteReader(filename);
+//     airline_routemap = Route::AirlineRouteReader(filename);
+//     //    Route::printMap(myAirRoutesMap);
+//     Route::printMap(airline_routemap);
 
-    std::vector<std::string> test;
-    test.emplace_back("AER");
-    test.emplace_back("EGO");
-    test.emplace_back("NBC");
+//     std::vector<std::string> test;
+//     test.emplace_back("AER");
+//     test.emplace_back("EGO");
+//     test.emplace_back("NBC");
 
-    for (int i = 0; i <= test.size(); i++)
-    {
-        for (auto &pair : airline_routemap)
-        {
-            if (pair.first[1] == test[i])
-            {
-                std::cout << pair.first[0] << std::endl;
-            }
-        }
-    }
+//     for (int i = 0; i <= test.size(); i++)
+//     {
+//         for (auto &pair : airline_routemap)
+//         {
+//             if (pair.first[1] == test[i])
+//             {
+//                 std::cout << pair.first[0] << std::endl;
+//             }
+//         }
+//     }
 
-    //    Route::findRoute("ACC", "CTU");
-    //    vector<string> test;
-    //    test.emplace_back("2B");
-    //    test.emplace_back("DME");
-    //    cout << Route::vecToString(myRoutesAirlineMap[test]) << endl;
+//     //    Route::findRoute("ACC", "CTU");
+//     //    vector<string> test;
+//     //    test.emplace_back("2B");
+//     //    test.emplace_back("DME");
+//     //    cout << Route::vecToString(myRoutesAirlineMap[test]) << endl;
 
-    return 0;
-}
+//     return 0;
+// }

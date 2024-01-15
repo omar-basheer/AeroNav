@@ -157,6 +157,7 @@ void ReadWrite::haversineHelper(const std::vector<std::string> all_starts, const
 
         // haversine
         double haversine_distance = 0;
+
         for (int i = 1; i < flight_vec.size() - 1; i++)
         {
             for (auto const &pair : Airport::AirportMap)
@@ -206,10 +207,8 @@ void ReadWrite::outputFileWriter(const std::string flight_path)
     {
         for (auto &pair : Route::AirlineRoutesMap)
         {
-            //                cout<<"test2"<<endl;
             if (pair.first[1] == output[i])
             {
-                //                    cout<<pair.first[0] << " ";
                 std::string airline = pair.first[0];
                 std::string stops = pair.first[2];
                 outputStream << "     " << i << ". flight " << airline << " from " << output[i] << " to " << output[i + 1] << " " << stops << " stops" << std::endl;
@@ -223,42 +222,42 @@ void ReadWrite::outputFileWriter(const std::string flight_path)
     std::cout << "> Written to file!" << std::endl;
 }
 
-int main()
-{
+// int main()
+// {
 
-    //    cout << "start city and country: " << ReadWrite::getStartCity() << ", " << ReadWrite::getStartCountry() << endl;
-    //
-    //    cout << "destination city and country: " << ReadWrite::getDestination_City() << ", " << ReadWrite::getDestination_Country() << endl;
-    //
-    //    cout << "starting search ..." << endl;
+//     //    cout << "start city and country: " << ReadWrite::getStartCity() << ", " << ReadWrite::getStartCountry() << endl;
+//     //
+//     //    cout << "destination city and country: " << ReadWrite::getDestination_City() << ", " << ReadWrite::getDestination_Country() << endl;
+//     //
+//     //    cout << "starting search ..." << endl;
 
-    std::string airport_filename = "//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/Airports/airports.csv";
+//     std::string airport_filename = "//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/Airports/airports.csv";
 
-    std::string airRoute_filename = "//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/Routes/routes.csv";
+//     std::string airRoute_filename = "//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/Routes/routes.csv";
 
-    std::map<std::vector<std::string>, Airport> myAirportMap;
-    myAirportMap = Airport::AirportFileReader(airport_filename);
-    //    Airport::printMap(myAirportMap);
+//     std::map<std::vector<std::string>, Airport> myAirportMap;
+//     myAirportMap = Airport::AirportFileReader(airport_filename);
+//     //    Airport::printMap(myAirportMap);
 
-    std::map<std::string, std::vector<std::string>> myAirRoutesMap;
-    myAirRoutesMap = Route::AirportRouteReader(airRoute_filename);
-    //    Route::printMap(myAirRoutesMap);
+//     std::map<std::string, std::vector<std::string>> myAirRoutesMap;
+//     myAirRoutesMap = Route::AirportRouteReader(airRoute_filename);
+//     //    Route::printMap(myAirRoutesMap);
 
-    std::map<std::vector<std::string>, std::vector<std::string>> myAirlineForRouteMap;
-    myAirlineForRouteMap = Route::AirlineRouteReader(airRoute_filename);
-    //    Route::printMap(myAirlineForRouteMap);
+//     std::map<std::vector<std::string>, std::vector<std::string>> myAirlineForRouteMap;
+//     myAirlineForRouteMap = Route::AirlineRouteReader(airRoute_filename);
+//     //    Route::printMap(myAirlineForRouteMap);
 
-    //    vector<string> test;
-    //    test.emplace_back("AER");
-    //    test.emplace_back("EGO");
-    //    test.emplace_back("NBC");
-    //
-    //    for(int i=0; i<=test.size(); i++){
-    //        for(auto &pair : myAirlineForRouteMap){
-    //            if(pair.first[1] == test[i]){
-    //                cout << pair.first[0] << endl;
-    //            }
-    //        }
-    //    }
-    ReadWrite::inputFileReader("/Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/ReadWrite/myfile");
-}
+//     //    vector<string> test;
+//     //    test.emplace_back("AER");
+//     //    test.emplace_back("EGO");
+//     //    test.emplace_back("NBC");
+//     //
+//     //    for(int i=0; i<=test.size(); i++){
+//     //        for(auto &pair : myAirlineForRouteMap){
+//     //            if(pair.first[1] == test[i]){
+//     //                cout << pair.first[0] << endl;
+//     //            }
+//     //        }
+//     //    }
+//     ReadWrite::inputFileReader("/Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/ReadWrite/myfile");
+// }

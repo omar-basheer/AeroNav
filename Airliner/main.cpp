@@ -18,16 +18,16 @@ int main(){
     
     std::map<std::vector<std::string>, Airport> airport_map;
     airport_map = Airport::AirportFileReader(airport_filename);
-//    Airport::printMap(myAirportMap);
+    // Airport::printMap(airport_map);
     
     std::map<std::string, std::vector<std::string>> airport_routemap;
     airport_routemap = Route::AirportRouteReader(airRoute_filename);
-//    Route::printMap(myAirRoutesMap);
+    // Route::printMap(airport_map);
     
     std::map<std::vector<std::string>, std::vector<std::string>> airline_routemap;
     airline_routemap = Route::AirlineRouteReader(airRoute_filename);
-//    Route::printMap(myAirRoutesMap);
+    // Route::printMap(airport_map);
     
-    ReadWrite::inputFileReader("//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/ReadWrite/myfile");
+    ReadWrite::inputFileReader("//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/ReadWrite/myfile.txt");
     
 }
