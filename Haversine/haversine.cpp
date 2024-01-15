@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include <iostream>
+#include "haversine.h"
 
 /**
  * Calculates the distance between two points on the Earth's surface using the Haversine formula.
@@ -15,8 +16,7 @@
  * @param lon2 The longitude of the second point in degrees.
  * @return The distance between the two points in kilometers.
  */
-static double haversine(double lat1, double lon1,
-                        double lat2, double lon2)
+double haversine(double lat1, double lon1, double lat2, double lon2)
 {
     // distance between latitudes and longitudes
     double dLat = (lat2 - lat1) * M_PI / 180.0;

@@ -115,6 +115,15 @@ public:
      */
     static std::map<std::vector<std::string>, Airport> AirportFileReader(const std::string &filename);
 
+
+    /**
+     * @brief A map that associates a vector of strings with an Airport object.
+     *
+     * The keys of the map are vectors of strings, and the values are Airport objects.
+     * This map allows efficient lookup of an Airport based on a vector of strings.
+     */
+    static std::map<std::vector<std::string>, Airport> AirportMap;
+
     /**
      * Prints the contents of a map of airports.
      *

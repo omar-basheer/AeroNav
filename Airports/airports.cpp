@@ -143,7 +143,7 @@ std::string Airport::vecToString(const std::vector<std::string> string_vector)
  * The keys of the map are vectors of strings, and the values are Airport objects.
  * This map allows efficient lookup of an Airport based on a vector of strings.
  */
-std::map<std::vector<std::string>, Airport> AirportMap;
+std::map<std::vector<std::string>, Airport> Airport::AirportMap;
 
 /**
  * Reads airport data from a file and creates a map of airports.
