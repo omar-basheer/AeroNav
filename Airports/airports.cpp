@@ -1,5 +1,4 @@
-//  Airports
-//  Created by Omar Basheer on 11/19/22.
+// Created by Omar Basheer on 11/19/22.
 
 #include <map>
 #include <string>
@@ -10,7 +9,7 @@
 #include "airports.h"
 
 /**
- * Default constructor for the Airport class.
+ * @brief Default constructor for the Airport class.
  * Initializes all member variables to empty strings.
  */
 Airport::Airport()
@@ -115,7 +114,7 @@ const std::string Airport::toString() const
 }
 
 /**
- * Converts a vector of strings to a string representation.
+ * @brief Converts a vector of strings to a string representation.
  *
  * @param string_vector The vector of strings to be converted.
  * @return The string representation of the vector.
@@ -146,7 +145,7 @@ std::string Airport::vecToString(const std::vector<std::string> string_vector)
 std::map<std::vector<std::string>, Airport> Airport::AirportMap;
 
 /**
- * Reads airport data from a file and creates a map of airports.
+ * @brief Reads airport data from a file and creates a map of airports.
  * The file should be in CSV format with the following columns:
  * 1. Airport ID
  * 2. Name
@@ -213,7 +212,7 @@ std::map<std::vector<std::string>, Airport> Airport::AirportFileReader(const std
 }
 
 /**
- * Prints the contents of a map of airports.
+ * @brief Prints the contents of a map of airports.
  *
  * @param thisMap The map of airports to be printed.
  */

@@ -1,5 +1,3 @@
-//  main.cpp
-//  AirlinerC++
 //  Created by omar on 11/19/22.
 
 #include <map>
@@ -10,6 +8,10 @@
 #include "../ReadWrite/read_write.h"
 
 
+/**
+ * @brief The entry point of the program.
+ * @return int The exit status of the program.
+ */
 int main(){
     
     std::string airport_filename = "//Users/admin/Library/CloudStorage/OneDrive-AshesiUniversity/Ashesi University/ashesi year 2/sem2/intermediate computer programming/AeroNav/Airports/airports.csv";

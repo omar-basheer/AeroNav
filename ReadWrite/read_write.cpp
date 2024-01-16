@@ -1,4 +1,3 @@
-//  ReadWrite
 //  Created by Omar Basheer on 11/27/22.
 
 #include <vector>
@@ -12,53 +11,93 @@
 #include "../Airports/airports.h"
 #include "../Haversine/haversine.h"
 
-std::string ReadWrite::StartCity;
-std::string ReadWrite::StartCountry;
-std::string ReadWrite::Destination_City;
-std::string ReadWrite::Destination_Country;
+std::string ReadWrite::StartCity;/* The start city of a given flight*/
+std::string ReadWrite::StartCountry;/* The start country of a given flight*/
+std::string ReadWrite::Destination_City;/* The destination city of a given flight*/
+std::string ReadWrite::Destination_Country;/* The destination country of a given flight*/
 
+/**
+ * @brief Retrieves the start city for the navigation.
+ *
+ * @return The start city as a string.
+ */
 std::string ReadWrite::getStartCity()
 {
     return StartCity;
 }
 
+/**
+ * @brief Retrieves the start country.
+ *
+ * @return The start country as a string.
+ */
 std::string ReadWrite::getStartCountry()
 {
     return StartCountry;
 }
 
+/**
+ * @brief Retrieves the destination city.
+ *
+ * @return The destination city as a string.
+ */
 std::string ReadWrite::getDestination_City()
 {
     return Destination_City;
 }
 
+/**
+ * @brief Get the destination country.
+ * 
+ * @return std::string The destination country.
+ */
 std::string ReadWrite::getDestination_Country()
 {
     return Destination_Country;
 }
 
+/**
+ * @brief Sets the starting city for the navigation.
+ * 
+ * @param city The name of the starting city.
+ */
 void ReadWrite::setStartCity(const std::string city)
 {
     StartCity = city;
 }
 
+/**
+ * @brief Sets the starting country for the ReadWrite object.
+ * 
+ * @param country The name of the starting country.
+ */
 void ReadWrite::setStartCountry(const std::string country)
 {
     StartCountry = country;
 }
 
+/**
+ * @brief Sets the destination city for the ReadWrite object.
+ * 
+ * @param city The name of the destination city.
+ */
 void ReadWrite::setDestinationCity(const std::string city)
 {
     Destination_City = city;
 }
 
+/**
+ * @brief Sets the destination country for the ReadWrite object.
+ * 
+ * @param country The name of the destination country.
+ */
 void ReadWrite::setDestinationCountry(const std::string country)
 {
     Destination_Country = country;
 }
 
 /**
- * Read user input file containing start city and country, and destination city and country
+ * @brief Read user input file containing start city and country, and destination city and country
  * @param input_filename  the file name of the users input file
  */
 void ReadWrite::inputFileReader(const std::string &input_filename)
@@ -133,7 +172,7 @@ void ReadWrite::inputFileReader(const std::string &input_filename)
 }
 
 /**
- * Calculates haversine distance between airports in a solution path and accumulates the values to obtain the total distance between the start and goal airports given a particular solution path. Passes solution path with lowest distance to outputFileWriter for file writing
+ *@brief Calculates haversine distance between airports in a solution path and accumulates the values to obtain the total distance between the start and goal airports given a particular solution path. Passes solution path with lowest distance to outputFileWriter for file writing
  *@param all_starts a string vector of the iata codes of all airports in the given start city
  *@param all_goals a string vector of the iata codes of all airports in the given goal city
  */
@@ -189,6 +228,10 @@ void ReadWrite::haversineHelper(const std::vector<std::string> all_starts, const
     outputFileWriter(all_paths.begin()->second);
 }
 
+/**
+ * @brief Writes the flight path to an output file.
+ * @param flight_path The flight path to be written.
+ */
 void ReadWrite::outputFileWriter(const std::string flight_path)
 {
 

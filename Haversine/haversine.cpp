@@ -1,5 +1,4 @@
-// Haversine
-// Created by omar on 11/28/22.
+// Created by Omar Basheer on 11/28/22.
 // This code is contributed by Mahadev.
 // Obtained from GeeksForGeeks.org
 
@@ -8,7 +7,7 @@
 #include "haversine.h"
 
 /**
- * Calculates the distance between two points on the Earth's surface using the Haversine formula.
+ * @brief Calculates the distance between two points on the Earth's surface using the Haversine formula.
  *
  * @param lat1 The latitude of the first point in degrees.
  * @param lon1 The longitude of the first point in degrees.
