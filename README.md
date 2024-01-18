@@ -21,7 +21,26 @@ g++ -std=c++14 -o AeroNav read_write.cpp -I.
 Note: Replace [other source files] with the actual names of your project's source files.
 
 3. Run the Executable:
-
 ```bash
 ./AeroNav
 ```
+
+### Usage
+1. Input File:
+Prepare an input file containing start city, start country, destination city, and destination country. Each value should be separated by a comma and space (, ).
+Example input file (e.g., input.txt):
+```sql
+New York, USA
+London, UK
+```
+2. Run AeroNav:
+Execute the compiled AeroNav executable with the input file as a parameter.
+```bash
+./AeroNav input.txt
+```
+
+3. View Output:
+AeroNav will read the input file, find the optimal flight path, calculate Haversine distances, and generate an output file (flight_plan.txt) with detailed flight information.
+
+5. Explore Flight Plan:
+Open flight_plan.txt to view the generated flight plan, including airline information and total distance.
