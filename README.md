@@ -1,2 +1,4 @@
-# ICP-Individual-Project---2
-C++ version of Flight Finding Program Written in ICP Individual Project 1
+# AeroNav
+C++ application designed to assist users in planning and visualizing air travel routes. This project leverages airport and route data to help users determine the optimal flight paths between cities
+
+It enables users to input their departure and destination cities, providing detailed flight plans, including distance calculations.
